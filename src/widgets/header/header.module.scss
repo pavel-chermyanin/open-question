@@ -1,0 +1,20 @@
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+  padding: 0 10px;
+  gap: 24px;
+  //height: 34px;
+  background: var(--primary-color);
+
+  //margin-bottom: 5px;
+  color: white;
+  box-shadow: rgba(34, 60, 80, 0.4) 5px 4px 18px -2px;
+  //background: linear-gradient(90deg, rgb(255, 130, 0), rgb(255, 130, 0));
+
+
+  position: relative;
+  overflow: hidden;
+}
+
+

@@ -1,0 +1,16 @@
+@use "variables";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+//@import "mixis";
+
+body {
+  overflow: hidden;
+  //padding-inline: 10px;
+
+  //@include custom-scrollbar('10px','10px'); // Используйте ваш миксин
+}
+
+
+

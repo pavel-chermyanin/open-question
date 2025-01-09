@@ -1,0 +1,38 @@
+@mixin fz($min-fz, $max-fz) {
+  $add-fz: $max-fz - $min-fz;
+  $add-min-fz: $add-fz + $add-fz * 0.7;
+
+  @media (min-width: 1920px) {
+    font-size: calc(#{$min-fz + px} + #{$add-fz} * (1920 / #{$max-width}));
+  }
+
+  @media (min-width: 767px) and (max-width: 1920px) {
+    font-size: calc(#{$min-fz + px} + #{$add-fz} * (100vw / #{$max-width}));
+  }
+
+  @media (max-width: 767px) {
+    font-size: calc(
+            #{$min-fz + px} + #{$add-min-fz} * ((100vw - #{$min-width + px}) / #{$max-width})
+    );
+  }
+}
+
+@mixin adaptiv-value($property, $minSize, $startSize) {
+  $addSize: $startSize - $minSize;
+  $addMinSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+
+    #{$property}: calc(#{$minSize + px} + #{$addMinSize} * ((100vw - #{$min-width + px}) / #{$max-width})) !important;
+  }
+  @media (min-width: 767px) {
+
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw / #{$max-width}))) !important;
+  }
+  @media (min-width: 1920px) {
+
+    #{$property}: #{$startSize + px} !important;
+  }
+
+}
+

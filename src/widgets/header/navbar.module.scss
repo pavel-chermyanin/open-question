@@ -1,0 +1,13 @@
+
+.nav_item_wrapper {
+}
+
+.nav_item {
+  height: 100%;
+  color: white !important;
+  font-size: 12px !important;
+
+  &:hover{
+    background: rgba(0,0,0,0.1) !important;
+  }
+}
