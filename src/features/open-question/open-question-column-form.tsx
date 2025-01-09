@@ -39,11 +39,13 @@ export const OpenQuestionColumnForm = () => {
 
   useEffect(() => {
     dispatch(resetPrice())
-  }, [questionIndex,listIndex]);
+  }, [questionIndex, listIndex]);
 
-  const calculatePrice = async (data: any) => {
+  const calculatePrice = async (data: { sheet: string }) => {
     dispatch(getPrice({id: file_id, list_name: preview?.sheets?.[+data.sheet]}))
   }
+
+  // const convertedData = !!preview?.codes && Object.entries(Object.values(preview?.codes)[listIndex])
   return (
     <FormProvider {...methods}>
       <div className={'grid grid-cols-2 gap-4 mt-5'}>
@@ -51,7 +53,7 @@ export const OpenQuestionColumnForm = () => {
           <Table
             bordered
             height={200}
-            data={(preview?.codes && (listIndex || +listIndex === 0)) ? Object.entries(Object.values(preview?.codes)?.[listIndex as never]).map(([code, answer]) => ({
+            data={(preview?.codes && (listIndex || +listIndex === 0)) ? Object.entries(Object.values(preview?.codes)[+listIndex]).map(([code, answer]) => ({
               'код': code,
               'ответ': answer
             })) : []}
@@ -83,7 +85,7 @@ export const OpenQuestionColumnForm = () => {
           <Table
             bordered
             height={200}
-            data={preview?.preview?.slice(1)?.[questionIndex as never]?.map(item => ({'ответ': item})) ?? []}
+            data={preview?.preview?.slice(1)?.[+questionIndex]?.map(item => ({'ответ': item})) ?? []}
           >
             <Column key={'ответ'} flexGrow={1}>
               <HeaderCell>{'ответ'}</HeaderCell>
