@@ -6,12 +6,13 @@ import {Button, Message, Panel, Text} from "rsuite";
 import {ClearSessionStatusButton} from "@/features/open-question/clear-session-status-button.tsx";
 import {useAutoCodingStatus} from "@/shared/hooks/use-autocoding-status.tsx";
 import {DownloadCompletedFileButton} from "@/features/open-question/download-completed-file-button.tsx";
+import {AutocodingProgressBar} from "@/widgets/open-question/autocoding-progress-bar.tsx";
 
 
 export const BannerStatus = () => {
   const status = useSelector(selectSessionStatus)
   const [statusText, setStatusText] = useState('')
-  useAutoCodingStatus()
+  const {total, completed, pending} = useAutoCodingStatus()
 
   useEffect(() => {
     switch (status) {
@@ -36,6 +37,11 @@ export const BannerStatus = () => {
     <Message className={''}>
       <div className={'flex items-center gap-4'}>
         <strong>Статус!</strong> {statusText}.
+        {(status === SessionStatus.AUTOCODING || status === SessionStatus.AUTOCODING_COMPLETED) &&
+          <AutocodingProgressBar
+            status={pending ? 'active' : "success"}
+            percent={total > 0 ? +((completed / total) * 100).toFixed() : 0}/>
+        }
         <div className={'ml-auto flex gap-2'}>
           {status === SessionStatus.AUTOCODING_COMPLETED && <DownloadCompletedFileButton/>}
           <ClearSessionStatusButton/>

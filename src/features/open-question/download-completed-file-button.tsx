@@ -13,13 +13,13 @@ export const DownloadCompletedFileButton = () => {
       const res = await dispatch(downloadFinishFile({ session_id: file_id! })).unwrap();
 
       // Create a Blob from the response
-      const blob = new Blob([res], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }); // MIME type for .xlsx
+      const blob = new Blob([res], { type: 'application/octet-stream' }); // MIME type for .xlsx
       const url = URL.createObjectURL(blob);
 
       // Create a link element to trigger the download
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'downloaded_file.xlsx'; // Set the desired filename
+      a.download = `${file_id}.xlsx`; // Set the desired filename
       document.body.appendChild(a);
       a.click();
 

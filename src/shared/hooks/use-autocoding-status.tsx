@@ -22,6 +22,9 @@ export const useAutoCodingStatus = () => {
     if (status === SessionStatus.AUTOCODING) {
       const getStatus = async () => {
         const response = await dispatch(getTaskStatus({session_id: file_id!})).unwrap()
+        if (response) {
+          setStatusTask(response)
+        }
         if (response.total === response.completed) {
           setStatusTask(response)
           dispatch(setSessionStatus(SessionStatus.AUTOCODING_COMPLETED))

@@ -12,16 +12,16 @@ import {
 export const getPreviewData = createApiThunk<OpenQuestionPreview, string>(
   'openQuestion/getPreviewData',
   async (id) => {
-    const response = await openQuestionClient.post(OpenQuestionPaths.PREVIEW_DATA,{
-      session_id:id
+    const response = await openQuestionClient.post(OpenQuestionPaths.PREVIEW_DATA, {
+      session_id: id
     }); // Выполняем запрос через ваш экземпляр Axios
     return response; // Возвращаем только данные из ответа
   }
 );
 export const getPrice = createApiThunk<number, GetPriceRequest>(
   'openQuestion/getPrice',
-  async ({session_id,list_name}) => {
-    const response = await openQuestionClient.post(OpenQuestionPaths.GET_PRICE,{
+  async ({session_id, list_name}) => {
+    const response = await openQuestionClient.post(OpenQuestionPaths.GET_PRICE, {
       session_id,
       list_name
     }); // Выполняем запрос через ваш экземпляр Axios
@@ -29,10 +29,10 @@ export const getPrice = createApiThunk<number, GetPriceRequest>(
   }
 );
 
-export const postCodingJob = createApiThunk<{message:string}, PostCodingJobRequest>(
+export const postCodingJob = createApiThunk<{ message: string }, PostCodingJobRequest>(
   'openQuestion/postCodingJob',
-  async ({session_id,codes_sheet,sheet}) => {
-    const response = await openQuestionClient.post(OpenQuestionPaths.POST_CODING_JOB,{
+  async ({session_id, codes_sheet, sheet}) => {
+    const response = await openQuestionClient.post(OpenQuestionPaths.POST_CODING_JOB, {
       session_id,
       codes_sheet,
       sheet
@@ -41,22 +41,25 @@ export const postCodingJob = createApiThunk<{message:string}, PostCodingJobReque
   }
 );
 
-export const getTaskStatus = createApiThunk<GetTaskStatusResponse, {session_id:string}>(
+export const getTaskStatus = createApiThunk<GetTaskStatusResponse, { session_id: string }>(
   'openQuestion/getTaskStatus',
   async ({session_id}) => {
-    const response = await openQuestionClient.post(OpenQuestionPaths.GET_TASK_STATUS,{
+    const response = await openQuestionClient.post(OpenQuestionPaths.GET_TASK_STATUS, {
       session_id,
     }); // Выполняем запрос через ваш экземпляр Axios
     return response; // Возвращаем только данные из ответа
   }
 );
 
-export const downloadFinishFile = createApiThunk<any, {session_id:string}>(
+export const downloadFinishFile = createApiThunk<any, { session_id: string }>(
   'openQuestion/downloadFinishFile',
   async ({session_id}) => {
-    const response = await openQuestionClient.post(OpenQuestionPaths.DOWNLOAD_FINISH_FILE,{
-      session_id,
-    }); // Выполняем запрос через ваш экземпляр Axios
+    const response = await openQuestionClient.post(OpenQuestionPaths.DOWNLOAD_FINISH_FILE, {
+        session_id,
+      }
+      , {
+        responseType: 'blob',
+      }); // Выполняем запрос через ваш экземпляр Axios
     return response; // Возвращаем только данные из ответа
   }
 );

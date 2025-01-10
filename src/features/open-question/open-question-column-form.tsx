@@ -61,7 +61,7 @@ export const OpenQuestionColumnForm = () => {
   const submitAutocoding = (data: { sheet: string, codes_sheet: string }) => {
     if (preview?.codes) {
       const codes_sheet = Object.keys(preview?.codes)[+data.codes_sheet]
-      dispatch(postCodingJob({sheet: data.sheet, codes_sheet, session_id: file_id!}))
+      dispatch(postCodingJob({sheet: data.sheet.slice(0, data.sheet.indexOf(' ')), codes_sheet, session_id: file_id!}))
       dispatch(setSessionStatus(SessionStatus.AUTOCODING));
     }
   }
