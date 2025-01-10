@@ -15,8 +15,8 @@ export default defineConfig({
     'process.env': {}
   },
   server: {
+    host: '0.0.0.0',
     port: 3001, // Устанавливаем порт на 3001
-
   },
   css: {
     preprocessorOptions: {

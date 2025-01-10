@@ -12,7 +12,9 @@ import {Brands} from "@/pages/brands.tsx";
 export const router = createBrowserRouter([
   {
     path: RouteTypes.HOME,
-    element: <MainPage />,
+    element:
+      <MainPage />
+    ,
     children: [
       {
         path: RouteTypes.HOME, // Дочерний маршрут с таким же путем

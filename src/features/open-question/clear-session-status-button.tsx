@@ -11,6 +11,6 @@ export const ClearSessionStatusButton = () => {
     dispatch(clearOpenQuestion())
   }
   return (
-    <Button onClick={clearSession} appearance={'primary'} className={'ml-auto'}>Очистить сессию</Button>
+    <Button onClick={clearSession} appearance={'primary'} >Очистить сессию</Button>
   )
 }
