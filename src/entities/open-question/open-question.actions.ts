@@ -2,6 +2,7 @@ import {createApiThunk} from "@/app/config/create-api-thunk.ts";
 import {openQuestionClient} from "@/app/config/open-question-client.ts";
 import {OpenQuestionPaths} from "./open-question.paths.ts";
 import {
+  CreateCodesRequest,
   GetPriceRequest,
   GetTaskStatusResponse,
   OpenQuestionPreview,
@@ -41,15 +42,15 @@ export const postCodingJob = createApiThunk<{ message: string }, PostCodingJobRe
   }
 );
 
-export const getTaskStatus = createApiThunk<GetTaskStatusResponse, { session_id: string }>(
-  'openQuestion/getTaskStatus',
-  async ({session_id}) => {
-    const response = await openQuestionClient.post(OpenQuestionPaths.GET_TASK_STATUS, {
-      session_id,
-    }); // Выполняем запрос через ваш экземпляр Axios
-    return response; // Возвращаем только данные из ответа
-  }
-);
+// export const getTaskStatus = createApiThunk<GetTaskStatusResponse, { session_id: string }>(
+//   'openQuestion/getTaskStatus',
+//   async ({session_id}) => {
+//     const response = await openQuestionClient.post(OpenQuestionPaths.GET_TASK_STATUS, {
+//       session_id,
+//     }); // Выполняем запрос через ваш экземпляр Axios
+//     return response; // Возвращаем только данные из ответа
+//   }
+// );
 
 export const downloadFinishFile = createApiThunk<any, { session_id: string }>(
   'openQuestion/downloadFinishFile',
@@ -60,6 +61,19 @@ export const downloadFinishFile = createApiThunk<any, { session_id: string }>(
       , {
         responseType: 'blob',
       }); // Выполняем запрос через ваш экземпляр Axios
+    return response; // Возвращаем только данные из ответа
+  }
+);
+
+export const createCodes = createApiThunk<any, CreateCodesRequest>(
+  'openQuestion/createCodes',
+  async ({session_id, question_name, question_full}) => {
+    const response = await openQuestionClient.post(OpenQuestionPaths.CREATE_CODES, {
+        session_id,
+        question_name,
+        question_full
+      }
+    ); // Выполняем запрос через ваш экземпляр Axios
     return response; // Возвращаем только данные из ответа
   }
 );

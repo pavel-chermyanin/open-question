@@ -5,7 +5,8 @@ export enum OpenQuestionPaths {
   PREVIEW_DATA = '/api/preview_data',
   GET_PRICE = '/api/get_price',
   POST_CODING_JOB = '/api/postCodingJob',
-  GET_TASK_STATUS = '/api/get_task_status',
+  // GET_TASK_STATUS = '/api/get_task_status',
   DOWNLOAD_FINISH_FILE = '/api/download_finish_file',
+  CREATE_CODES = '/api/create_codes',
 
 }

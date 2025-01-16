@@ -5,6 +5,7 @@ export type OpenQuestionState = {
   file_id: string | null
   session_status:SessionStatus | null
   preview:OpenQuestionPreview | null
+  loadingPreview:boolean
   calculated_price: number | null
 }
 
@@ -23,11 +24,21 @@ export type PostCodingJobRequest = {
   sheet:string
   codes_sheet:string
 }
-
-export type GetTaskStatusResponse = {
-  total:number
-  pending:number
-  completed:number
+export type CreateCodesRequest = {
+  session_id:string
+  question_name:string[]
+  question_full:string[]
 }
 
-export type Codes = Record<string, Record<string, string>>
+// export type GetTaskStatusResponse = {
+//   total:number
+//   pending:number
+//   completed:number
+// }
+
+export type CodesFields = {
+  children:string[]
+  codes:Record<string, string>
+}
+
+export type Codes = Record<string, CodesFields>

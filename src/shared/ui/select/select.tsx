@@ -16,6 +16,7 @@ interface CustomSelectProps {
   disabled?: boolean;
   container?: HTMLElement | (() => HTMLElement); // Изменяем тип на всегда возвращаемый HTMLElement
   cleanable?:boolean
+  disabledItemValues?:string[]
 }
 
 export const Select: React.FC<CustomSelectProps> = (
@@ -28,7 +29,8 @@ export const Select: React.FC<CustomSelectProps> = (
     onChangeOutside,
     disabled = false,
     container,
-    cleanable= true
+    cleanable= true,
+    disabledItemValues
   }
 ) => {
   const {control} = useFormContext();
@@ -42,6 +44,7 @@ export const Select: React.FC<CustomSelectProps> = (
         render={({field}) => (
           <>
             <SelectPicker
+              disabledItemValues={disabledItemValues}
               cleanable={cleanable}
               placement={placement}
               container={typeof container === 'function' ? container() : container || document.body} // Гарантируем возврат HTMLElement

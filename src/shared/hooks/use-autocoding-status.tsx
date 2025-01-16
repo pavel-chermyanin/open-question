@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {
-  getTaskStatus,
+  // getTaskStatus,
   GetTaskStatusResponse,
   selectFileId,
   selectSessionStatus,
@@ -20,22 +20,16 @@ export const useAutoCodingStatus = () => {
 
   useEffect(() => {
     if (status === SessionStatus.AUTOCODING) {
-      const getStatus = async () => {
-        const response = await dispatch(getTaskStatus({session_id: file_id!})).unwrap()
-        if (response) {
-          setStatusTask(response)
-        }
-        if (response.total === response.completed) {
-          setStatusTask(response)
+      const socket = new WebSocket(`ws://172.16.0.138:8000/api/ws/get_task_status/${file_id}`);
+      socket.onmessage = (ev) => {
+        const data = JSON.parse(ev.data)
+        setStatusTask(data)
+        if (data.total === data.completed) {
           dispatch(setSessionStatus(SessionStatus.AUTOCODING_COMPLETED))
         }
-        if (response.pending) {
-          setTimeout(() => {
-            getStatus()
-          }, 5000)
-        }
       }
-      getStatus()
+
+
     }
   }, [status]);
 

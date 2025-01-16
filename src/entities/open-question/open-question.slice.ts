@@ -7,7 +7,8 @@ const initialState: OpenQuestionState = {
   file_id: null,
   session_status: null,
   preview: null,
-  calculated_price:null
+  calculated_price:null,
+  loadingPreview:false
 };
 
 
@@ -30,6 +31,10 @@ const openQuestionSlice = createSlice({
     builder
       .addCase(getPreviewData.fulfilled, (state, action) => {
         state.preview = action.payload
+        state.loadingPreview = false
+      })
+      .addCase(getPreviewData.pending, (state, action) => {
+        state.loadingPreview = true
       })
       .addCase(getPrice.fulfilled, (state, action) => {
         state.calculated_price = action.payload
